@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">USBDroid</string>
+    <string name="app_tagline">Universal USB Hardware Control Center</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_modules">Modules</string>
+    <string name="nav_logs">Logs</string>
+    <string name="nav_ai">AI Assistant</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- USB Detection -->
+    <string name="usb_device_connected">USB Device Connected</string>
+    <string name="usb_device_disconnected">USB Device Disconnected</string>
+    <string name="usb_permission_required">USB Permission Required</string>
+    <string name="usb_permission_explanation">USBDroid needs permission to access this USB device for communication and control.</string>
+    <string name="usb_otg_not_supported">USB OTG Not Supported</string>
+    <string name="usb_otg_explanation">This device does not appear to support USB Host (OTG) mode. USBDroid requires OTG functionality to communicate with USB devices.</string>
+    <string name="grant_permission">Grant Permission</string>
+    <string name="deny">Deny</string>
+    <string name="device_detected">Device Detected</string>
+    <string name="unknown_device">Unknown Device</string>
+    <string name="unknown_manufacturer">Unknown Manufacturer</string>
+    <string name="vid_pid_format" formatted="false">VID:%04X PID:%04X</string>
+
+    <!-- Module Names -->
+    <string name="module_adb">ADB Controller</string>
+    <string name="module_fastboot">Fastboot Controller</string>
+    <string name="module_serial">Serial Terminal</string>
+    <string name="module_flasher">Firmware Flasher</string>
+    <string name="module_hid">HID Analyzer</string>
+    <string name="module_storage">Storage Analyzer</string>
+    <string name="module_network">Network Controller</string>
+    <string name="module_analyzer">Device Analyzer</string>
+
+    <!-- ADB Module -->
+    <string name="adb_shell">Shell</string>
+    <string name="adb_logcat">Logcat</string>
+    <string name="adb_files">Files</string>
+    <string name="adb_packages">Packages</string>
+    <string name="adb_device_info">Device Info</string>
+    <string name="adb_screenshot">Screenshot</string>
+    <string name="adb_shell_hint">Enter command...</string>
+    <string name="adb_execute">Execute</string>
+    <string name="adb_connecting">Connecting to ADB...</string>
+    <string name="adb_authenticating">Authenticating...</string>
+    <string name="adb_connected">ADB Connected</string>
+    <string name="adb_disconnected">ADB Disconnected</string>
+    <string name="adb_auth_failed">Authentication Failed</string>
+
+    <!-- Fastboot Module -->
+    <string name="fastboot_variables">Variables</string>
+    <string name="fastboot_flash">Flash</string>
+    <string name="fastboot_partitions">Partitions</string>
+    <string name="fastboot_reboot">Reboot</string>
+    <string name="fastboot_oem_unlock">OEM Unlock</string>
+    <string name="fastboot_warning_title">High Risk Operation</string>
+    <string name="fastboot_warning_message">Flashing firmware can brick your device. Verify the image file and partition before proceeding.</string>
+    <string name="fastboot_erase_confirm">Erase %s? This cannot be undone.</string>
+
+    <!-- Serial Terminal -->
+    <string name="serial_connect">Connect</string>
+    <string name="serial_disconnect">Disconnect</string>
+    <string name="serial_send">Send</string>
+    <string name="serial_baud_rate">Baud Rate</string>
+    <string name="serial_data_bits">Data Bits</string>
+    <string name="serial_stop_bits">Stop Bits</string>
+    <string name="serial_parity">Parity</string>
+    <string name="serial_flow_control">Flow Control</string>
+    <string name="serial_dtr">DTR</string>
+    <string name="serial_rts">RTS</string>
+    <string name="serial_hex_mode">HEX Mode</string>
+    <string name="serial_timestamp">Timestamps</string>
+    <string name="serial_autoscroll">Autoscroll</string>
+    <string name="serial_clear">Clear</string>
+    <string name="serial_macros">Macros</string>
+    <string name="serial_plotter">Plotter</string>
+    <string name="serial_save_log">Save Log</string>
+
+    <!-- Firmware Flasher -->
+    <string name="flasher_select_file">Select Firmware File</string>
+    <string name="flasher_verify">Verify</string>
+    <string name="flasher_flash">Flash</string>
+    <string name="flasher_erase">Erase</string>
+    <string name="flasher_read">Read Back</string>
+    <string name="flasher_progress_format" formatted="false">%d / %d bytes (%.1f%%)</string>
+    <string name="flasher_verifying">Verifying...</string>
+    <string name="flasher_flash_complete">Flash Complete</string>
+    <string name="flasher_flash_failed">Flash Failed</string>
+
+    <!-- HID Module -->
+    <string name="hid_monitor">Monitor</string>
+    <string name="hid_descriptor">Descriptor</string>
+    <string name="hid_record">Record</string>
+    <string name="hid_replay">Replay</string>
+    <string name="hid_export">Export CSV</string>
+
+    <!-- Storage Module -->
+    <string name="storage_partitions">Partitions</string>
+    <string name="storage_files">Files</string>
+    <string name="storage_benchmark">Benchmark</string>
+    <string name="storage_health">Health</string>
+    <string name="storage_sector_view">Sector View</string>
+
+    <!-- AI Assistant -->
+    <string name="ai_title">AI Hardware Assistant</string>
+    <string name="ai_subtitle">Powered by Claude</string>
+    <string name="ai_hint">Ask about this device...</string>
+    <string name="ai_send">Send</string>
+    <string name="ai_thinking">Analyzing...</string>
+    <string name="ai_error">Error: %s</string>
+    <string name="ai_offline_mode">Offline Mode - Using Local Database</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_dark_theme">Dark Theme</string>
+    <string name="settings_accent_color">Accent Color</string>
+    <string name="settings_behavior">Behavior</string>
+    <string name="settings_auto_connect">Auto-connect to known devices</string>
+    <string name="settings_keep_screen_on">Keep screen on during operations</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_notify_connect">Notify on device connect</string>
+    <string name="settings_vibration">Haptic feedback</string>
+    <string name="settings_advanced">Advanced</string>
+    <string name="settings_root_features">Root-enhanced features</string>
+    <string name="settings_serial_buffer">Serial buffer size (KB)</string>
+    <string name="settings_log_level">Log level</string>
+    <string name="settings_about">About</string>
+    <string name="settings_version">Version %s</string>
+    <string name="settings_open_source">Open Source Licenses</string>
+
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="back">Back</string>
+    <string name="close">Close</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
+    <string name="copy">Copy</string>
+    <string name="paste">Paste</string>
+    <string name="clear">Clear</string>
+    <string name="loading">Loading...</string>
+    <string name="error">Error</string>
+    <string name="success">Success</string>
+    <string name="warning">Warning</string>
+    <string name="info">Info</string>
+    <string name="not_implemented">Coming in next update</string>
+    <string name="offline_database_unavailable">Offline database not loaded</string>
+</resources>

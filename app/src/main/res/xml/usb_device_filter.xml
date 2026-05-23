@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Match all USB devices - we'll filter in code -->
+    <usb-device />
+    <!-- Specific VID/PID entries for common devices -->
+    <!-- Google / Android ADB -->
+    <usb-device vendor-id="7531" product-id="53247" /> <!-- 0x18D1 0xD001 ADB -->
+    <usb-device vendor-id="7531" product-id="20199" /> <!-- 0x18D1 0x4EE7 ADB -->
+    <usb-device vendor-id="7531" product-id="20192" /> <!-- 0x18D1 0x4EE0 Fastboot -->
+    <!-- FTDI -->
+    <usb-device vendor-id="1027" /> <!-- 0x0403 -->
+    <!-- Silicon Labs CP210x -->
+    <usb-device vendor-id="4292" /> <!-- 0x10C4 -->
+    <!-- QinHeng CH340/CH341 -->
+    <usb-device vendor-id="6790" /> <!-- 0x1A86 -->
+    <!-- Arduino -->
+    <usb-device vendor-id="9025" /> <!-- 0x2341 -->
+    <!-- Adafruit -->
+    <usb-device vendor-id="9114" /> <!-- 0x239A -->
+    <!-- Espressif ESP32 -->
+    <usb-device vendor-id="12346" /> <!-- 0x303A -->
+    <!-- STMicroelectronics -->
+    <usb-device vendor-id="1155" /> <!-- 0x0483 -->
+    <!-- Apple -->
+    <usb-device vendor-id="1452" /> <!-- 0x05AC -->
+    <!-- Samsung -->
+    <usb-device vendor-id="1256" /> <!-- 0x04E8 -->
+    <!-- Prolific PL2303 -->
+    <usb-device vendor-id="1659" /> <!-- 0x067B -->
+    <!-- Microsoft Xbox Controller -->
+    <usb-device vendor-id="1118" /> <!-- 0x045E -->
+    <!-- Sony PlayStation Controller -->
+    <usb-device vendor-id="1356" /> <!-- 0x054C -->
+    <!-- Nintendo -->
+    <usb-device vendor-id="1406" /> <!-- 0x057E -->
+</resources>
