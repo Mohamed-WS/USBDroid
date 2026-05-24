@@ -41,7 +41,7 @@ fun HomeScreen(
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(Background)
     ) {
         // Header

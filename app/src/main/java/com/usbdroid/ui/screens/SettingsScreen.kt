@@ -30,7 +30,7 @@ fun SettingsScreen(viewModel: MainViewModel) {
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(Background)
             .verticalScroll(rememberScrollState())
     ) {

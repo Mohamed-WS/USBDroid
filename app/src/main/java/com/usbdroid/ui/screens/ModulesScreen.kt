@@ -26,7 +26,7 @@ fun ModulesScreen(viewModel: MainViewModel) {
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .background(Background)
     ) {
         // Header
