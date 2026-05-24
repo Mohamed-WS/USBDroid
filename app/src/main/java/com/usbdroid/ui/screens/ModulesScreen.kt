@@ -26,7 +26,7 @@ fun ModulesScreen(viewModel: MainViewModel) {
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .background(Background)
     ) {
         // Header
@@ -52,7 +52,7 @@ fun ModulesScreen(viewModel: MainViewModel) {
         Divider(color = Divider, thickness = 1.dp)
 
         LazyColumn(
-            modifier = Modifier.weight(1f).fillMaxWidth(),
+            modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {

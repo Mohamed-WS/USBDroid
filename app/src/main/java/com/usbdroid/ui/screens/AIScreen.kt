@@ -35,7 +35,7 @@ fun AIScreen(viewModel: MainViewModel) {
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .background(Background)
     ) {
         // Header
