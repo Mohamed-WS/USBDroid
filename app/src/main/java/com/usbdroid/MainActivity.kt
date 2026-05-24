@@ -7,8 +7,6 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -101,19 +99,15 @@ fun USBDroidApp(
             if (currentRoute != Screen.Splash.route) {
                 BottomNavBar(navController, currentRoute)
             }
-        },
-        contentWindowInsets = WindowInsets(0, 0, 0, 0)
+        }
     ) { paddingValues ->
-        Box(
+        NavHost(
+            navController = navController,
+            startDestination = Screen.Splash.route,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            NavHost(
-                navController = navController,
-                startDestination = Screen.Splash.route,
-                modifier = Modifier.fillMaxSize()
-            ) {
             composable(Screen.Splash.route) {
                 SplashScreen(
                     onNavigateToHome = {
@@ -162,7 +156,6 @@ fun USBDroidApp(
                     onBack = { navController.popBackStack() }
                 )
             }
-        }
         }
     }
 }
