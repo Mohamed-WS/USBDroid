@@ -7,10 +7,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -94,71 +91,74 @@ fun USBDroidApp(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route ?: Screen.Home.route
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        bottomBar = {
-            if (currentRoute != Screen.Splash.route) {
-                BottomNavBar(navController, currentRoute)
-            }
-        }
-    ) { paddingValues ->
-        NavHost(
-            navController = navController,
-            startDestination = Screen.Splash.route,
+    Column(modifier = Modifier.fillMaxSize()) {
+        // Main content area - takes remaining space above bottom nav
+        Box(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .navigationBarsPadding()
+                .weight(1f)
+                .fillMaxWidth()
         ) {
-            composable(Screen.Splash.route) {
-                SplashScreen(
-                    onNavigateToHome = {
-                        navController.navigate(Screen.Home.route) {
-                            popUpTo(Screen.Splash.route) { inclusive = true }
+            NavHost(
+                navController = navController,
+                startDestination = Screen.Splash.route,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                composable(Screen.Splash.route) {
+                    SplashScreen(
+                        onNavigateToHome = {
+                            navController.navigate(Screen.Home.route) {
+                                popUpTo(Screen.Splash.route) { inclusive = true }
+                            }
                         }
-                    }
-                )
-            }
-            composable(Screen.Home.route) {
-                HomeScreen(
-                    viewModel = viewModel,
-                    onDeviceClick = { deviceInfo ->
-                        val moduleId = viewModel.getSuggestedModule(deviceInfo)
-                        navController.navigate(Screen.Module.createRoute(moduleId))
-                    },
-                    onOpenAnalyzer = {
-                        navController.navigate(Screen.Module.createRoute("analyzer"))
-                    }
-                )
-            }
-            composable(Screen.Modules.route) {
-                ModulesScreen(viewModel = viewModel)
-            }
-            composable(Screen.Logs.route) {
-                LogsScreen(viewModel = viewModel)
-            }
-            composable(Screen.AI.route) {
-                AIScreen(viewModel = viewModel)
-            }
-            composable(Screen.Settings.route) {
-                SettingsScreen(viewModel = viewModel)
-            }
-            composable(Screen.Module.route) { backStackEntry ->
-                val moduleId = backStackEntry.arguments?.getString("moduleId") ?: "analyzer"
-                ModuleDetailScreen(
-                    moduleId = moduleId,
-                    viewModel = viewModel,
-                    onNavigateBack = { navController.popBackStack() },
-                    onNavigateToUsbDialog = { navController.navigate("usbDialogTrigger") }
-                )
-            }
-            composable("usbDialogTrigger") {
-                com.usbdroid.ui.screens.modules.UsbDialogTriggerScreen(
-                    adbModule = viewModel.adbModule,
-                    onBack = { navController.popBackStack() }
-                )
+                    )
+                }
+                composable(Screen.Home.route) {
+                    HomeScreen(
+                        viewModel = viewModel,
+                        onDeviceClick = { deviceInfo ->
+                            val moduleId = viewModel.getSuggestedModule(deviceInfo)
+                            navController.navigate(Screen.Module.createRoute(moduleId))
+                        },
+                        onOpenAnalyzer = {
+                            navController.navigate(Screen.Module.createRoute("analyzer"))
+                        }
+                    )
+                }
+                composable(Screen.Modules.route) {
+                    ModulesScreen(viewModel = viewModel)
+                }
+                composable(Screen.Logs.route) {
+                    LogsScreen(viewModel = viewModel)
+                }
+                composable(Screen.AI.route) {
+                    AIScreen(viewModel = viewModel)
+                }
+                composable(Screen.Settings.route) {
+                    SettingsScreen(viewModel = viewModel)
+                }
+                composable(Screen.Module.route) { backStackEntry ->
+                    val moduleId = backStackEntry.arguments?.getString("moduleId") ?: "analyzer"
+                    ModuleDetailScreen(
+                        moduleId = moduleId,
+                        viewModel = viewModel,
+                        onNavigateBack = { navController.popBackStack() },
+                        onNavigateToUsbDialog = { navController.navigate("usbDialogTrigger") }
+                    )
+                }
+                composable("usbDialogTrigger") {
+                    com.usbdroid.ui.screens.modules.UsbDialogTriggerScreen(
+                        adbModule = viewModel.adbModule,
+                        onBack = { navController.popBackStack() }
+                    )
+                }
             }
         }
+        
+        // Bottom navigation bar - fixed at bottom, outside content area
+        BottomNavBar(
+            navController = navController,
+            currentRoute = currentRoute
+        )
     }
 }
 
