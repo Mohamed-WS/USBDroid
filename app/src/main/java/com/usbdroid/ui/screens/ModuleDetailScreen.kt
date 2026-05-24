@@ -23,7 +23,8 @@ import com.usbdroid.viewmodel.MainViewModel
 fun ModuleDetailScreen(
     moduleId: String,
     viewModel: MainViewModel,
-    onNavigateBack: () -> Unit
+    onNavigateBack: () -> Unit,
+    onNavigateToUsbDialog: () -> Unit = {}
 ) {
     val moduleInfo = remember(moduleId) { viewModel.getModuleInfo(moduleId) }
 
@@ -69,7 +70,9 @@ fun ModuleDetailScreen(
         ) {
             when (moduleId) {
                 "serial" -> SerialTerminalScreen()
-                "adb" -> ADBControllerScreen()
+                "adb" -> ADBControllerScreen(
+                    onNavigateToUsbDialog = onNavigateToUsbDialog
+                )
                 "fastboot" -> FastbootControllerScreen()
                 "flasher" -> FirmwareFlasherScreen()
                 "hid" -> HIDAnalyzerScreen()

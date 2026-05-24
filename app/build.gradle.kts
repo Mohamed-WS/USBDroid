@@ -66,6 +66,14 @@ android {
             excludes += "/META-INF/INDEX.LIST"
             excludes += "/META-INF/io.netty.versions.properties"
         }
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+    
+    // Fix for Android R+ resources.arsc requirement
+    androidResources {
+        noCompress += ""
     }
 }
 

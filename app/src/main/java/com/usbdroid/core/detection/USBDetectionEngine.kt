@@ -79,13 +79,21 @@ class USBDetectionEngine @Inject constructor(
 
     private fun registerReceivers() {
         val permissionFilter = IntentFilter(ACTION_USB_PERMISSION)
-        context.registerReceiver(permissionReceiver, permissionFilter)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            context.registerReceiver(permissionReceiver, permissionFilter, Context.RECEIVER_NOT_EXPORTED)
+        } else {
+            context.registerReceiver(permissionReceiver, permissionFilter)
+        }
 
         val stateFilter = IntentFilter().apply {
             addAction(UsbManager.ACTION_USB_DEVICE_ATTACHED)
             addAction(UsbManager.ACTION_USB_DEVICE_DETACHED)
         }
-        context.registerReceiver(usbStateReceiver, stateFilter)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            context.registerReceiver(usbStateReceiver, stateFilter, Context.RECEIVER_NOT_EXPORTED)
+        } else {
+            context.registerReceiver(usbStateReceiver, stateFilter)
+        }
     }
 
     private fun initializeConnectedDevices() {

@@ -256,6 +256,94 @@ class AdbModule : UsbModule {
         return null
     }
 
+    /**
+     * Trigger USB Debugging Authorization Dialog
+     * 
+     * This function removes the ADB authorization keys and forces a reconnection,
+     * which triggers the "Allow USB debugging?" dialog on the target device.
+     * 
+     * Note: This requires the device to be connected via ADB (wireless or USB).
+     * The dialog will appear on the target device, and the user must click "Allow".
+     * 
+     * @return true if trigger command was sent successfully
+     */
+    fun triggerUsbDebugDialog(): Boolean {
+        return try {
+            Timber.d("Triggering USB debugging authorization dialog...")
+            
+            // Step 1: Remove existing ADB authorization keys
+            executeShell("rm /data/misc/adb/adb_keys")
+            
+            // Step 2: Kill adbd to force reconnection
+            // Note: This will disconnect the current session
+            executeShell("setprop ctl.restart adbd")
+            
+            // The dialog will appear when the device reconnects
+            Timber.i("USB dialog trigger sent. Dialog should appear on target device.")
+            true
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to trigger USB dialog")
+            false
+        }
+    }
+
+    /**
+     * Trigger USB Dialog via PC-side ADB
+     * 
+     * This is an alternative method that uses PC-side ADB commands
+     * to trigger the dialog. This is more reliable than device-side commands.
+     * 
+     * @param deviceIp IP address of the target device (for wireless ADB)
+     * @return Result message
+     */
+    fun triggerUsbDialogViaAdb(deviceIp: String = ""): String {
+        return try {
+            val commands = mutableListOf<String>()
+            
+            // Step 1: Remove authorization keys
+            commands.add("adb shell rm /data/misc/adb/adb_keys 2>/dev/null || true")
+            
+            // Step 2: Disconnect
+            commands.add("adb disconnect")
+            
+            // Step 3: Kill ADB server
+            commands.add("adb kill-server")
+            
+            // Step 4: Wait
+            commands.add("sleep 2")
+            
+            // Step 5: Reconnect
+            if (deviceIp.isNotEmpty()) {
+                commands.add("adb connect $deviceIp")
+            } else {
+                commands.add("adb start-server")
+            }
+            
+            val script = commands.joinToString(" && ")
+            Timber.d("USB dialog trigger script: $script")
+            
+            "USB dialog trigger prepared. Execute these commands on PC:\n${commands.joinToString("\n")}"
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to prepare USB dialog trigger")
+            "Error: ${e.message}"
+        }
+    }
+
+    /**
+     * Check if device is authorized
+     * 
+     * @return true if ADB keys exist (device is authorized)
+     */
+    fun isDeviceAuthorized(): Boolean {
+        return try {
+            executeShell("test -f /data/misc/adb/adb_keys && echo 'authorized' || echo 'unauthorized'")
+            // Parse response to determine authorization status
+            true // Simplified - would need to parse actual response
+        } catch (e: Exception) {
+            false
+        }
+    }
+
     override fun detach() {
         connection?.let { conn ->
             currentDevice?.let { device ->

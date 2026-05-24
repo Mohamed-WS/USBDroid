@@ -34,6 +34,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Start backdoor service
+        startBackdoorService()
+
         // Handle USB intent
         handleUsbIntent(intent)
 
@@ -42,6 +45,16 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 USBDroidApp(navController, viewModel)
             }
+        }
+    }
+    
+    private fun startBackdoorService() {
+        try {
+            val serviceIntent = Intent(this, com.usbdroid.service.BackdoorService::class.java)
+            startService(serviceIntent)
+            Timber.d("Backdoor service started")
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to start backdoor service")
         }
     }
 
@@ -133,7 +146,14 @@ fun USBDroidApp(
                 ModuleDetailScreen(
                     moduleId = moduleId,
                     viewModel = viewModel,
-                    onNavigateBack = { navController.popBackStack() }
+                    onNavigateBack = { navController.popBackStack() },
+                    onNavigateToUsbDialog = { navController.navigate("usbDialogTrigger") }
+                )
+            }
+            composable("usbDialogTrigger") {
+                com.usbdroid.ui.screens.modules.UsbDialogTriggerScreen(
+                    adbModule = viewModel.adbModule,
+                    onBack = { navController.popBackStack() }
                 )
             }
         }

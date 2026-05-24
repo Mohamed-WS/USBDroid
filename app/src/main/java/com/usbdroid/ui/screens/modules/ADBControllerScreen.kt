@@ -24,7 +24,9 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ADBControllerScreen() {
+fun ADBControllerScreen(
+    onNavigateToUsbDialog: () -> Unit = {}
+) {
     var selectedTab by remember { mutableIntStateOf(0) }
     val tabs = listOf("Shell", "Logcat", "Files", "Packages", "Info")
     var isConnected by remember { mutableStateOf(false) }
@@ -110,6 +112,10 @@ fun ADBControllerScreen() {
                 }
 
                 Spacer(modifier = Modifier.weight(1f))
+
+                IconButton(onClick = onNavigateToUsbDialog, modifier = Modifier.size(36.dp)) {
+                    Icon(Icons.Filled.Security, contentDescription = "USB Dialog", tint = PrimaryCyan, modifier = Modifier.size(20.dp))
+                }
 
                 IconButton(onClick = {}, modifier = Modifier.size(36.dp)) {
                     Icon(Icons.Filled.Key, contentDescription = "Auth", tint = OnSurfaceVariant, modifier = Modifier.size(20.dp))

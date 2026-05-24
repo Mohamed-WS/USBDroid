@@ -48,6 +48,9 @@ class MainViewModel @Inject constructor(
     private val _darkTheme = MutableStateFlow(true)
     val darkTheme: StateFlow<Boolean> = _darkTheme.asStateFlow()
 
+    // ADB Module instance for USB Dialog Trigger feature
+    val adbModule: AdbModule = AdbModule()
+
     init {
         viewModelScope.launch {
             kotlinx.coroutines.delay(1500)

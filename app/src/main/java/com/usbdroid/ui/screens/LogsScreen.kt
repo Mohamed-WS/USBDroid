@@ -131,13 +131,12 @@ fun LogsScreen(viewModel: MainViewModel) {
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp, top = 8.dp, bottom = 80.dp),
                 verticalArrangement = Arrangement.spacedBy(6.dp)
             ) {
                 items(filteredLogs) { log ->
                     LogEntryCard(log = log)
                 }
-                item { Spacer(modifier = Modifier.height(16.dp)) }
             }
         }
     }
